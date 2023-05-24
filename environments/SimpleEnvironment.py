@@ -15,7 +15,8 @@ class SimpleEnvironment:
         # Initial price of the simulation and highest price
         self.init_price, self.highest_price = init_price, highest_price
         # The state is a duple representing current day and selling price
-        self.init_state = (-1, 0) 
+        self.init_state = (-1, 0)
+
         
 
     # Returns posible actions for a state 
@@ -47,6 +48,15 @@ class SimpleEnvironment:
     
     # Returns a random price 
     def get_random_price(self):
-        price = np.random.randint(0, self.highest_price)
+        price = np.random.randint(0, self.highest_price+1)
         return price
+    
+    
+    # Returns a numpy array representing the state space
+    def get_state_space(self, init_value):
+        return np.ones((self.days-1, self.highest_price+1))*init_value
+    
+    # Returns a numpy array representing the state-action space
+    def get_state_action_space(self, init_value=0):
+        return np.ones((self.days-1, self.highest_price+1, 2)) * init_value
         
