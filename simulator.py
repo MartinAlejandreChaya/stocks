@@ -12,6 +12,7 @@ from agents.IntelligentAgent import IntelligentAgent
 from agents.MCAgent import MCAgent
 from agents.TD0Agent import TD0Agent
 from agents.TDnAgent import TDnAgent
+from agents.QLearningAgent import QLearningAgent
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -175,8 +176,16 @@ plot_agents_rewards([td3_agent, mc_agent_2, intelligent_agent], simple_environme
 simple_environment = SimpleEnvironment(days=21)
 intelligent_agent = IntelligentAgent(simple_environment, risk=0.7)
 td3_agent = TDnAgent(simple_environment, n=3)
-plot_learning_progress([td3_agent], simple_environment, episodes=200000, smooth_weight=0.001)
+plot_learning_progress([td3_agent], simple_environment, episodes=100000, smooth_weight=0.001)
 td3_agent.plot_state_action_values(plt)
 plot_agents_rewards([td3_agent, intelligent_agent], simple_environment, runs = 30000, smooth_weight=0.001)
 #%%
-
+simple_environment = SimpleEnvironment(days = 7)
+qlearning_agent = QLearningAgent(simple_environment)
+td3_agent = TDnAgent(simple_environment, n = 3)
+sarsa_agent = TD0Agent(simple_environment)
+plot_learning_progress([qlearning_agent, td3_agent, sarsa_agent], simple_environment, episodes = 100000, smooth_weight = 0.001, epsilon = 0.1, learning_rate = 0.01)
+qlearning_agent.plot_state_action_values(plt)
+intelligent_agent = IntelligentAgent(simple_environment, risk=0.75)
+impatient_agent = ImpatientAgent(simple_environment)
+plot_agents_rewards([intelligent_agent, qlearning_agent, td3_agent, sarsa_agent, impatient_agent], simple_environment, runs = 100000, smooth_weight = 0.001)

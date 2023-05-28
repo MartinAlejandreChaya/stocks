@@ -13,7 +13,7 @@ from agents.LearningAgent import LearningAgent
 class TD0Agent(LearningAgent):
 
     def __init__(self, env, name = ""):
-        super(TD0Agent, self).__init__("TD0", env, name_extra = name)
+        super(TD0Agent, self).__init__("TD0(Sarsa)", env, name_extra = name)
     
         
     
